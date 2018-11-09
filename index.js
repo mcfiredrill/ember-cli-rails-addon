@@ -17,17 +17,6 @@ module.exports = {
     app.options.storeConfigInMeta = false;
     app.options.fingerprint = app.options.fingerprint || {};
     app.options.fingerprint.generateAssetMap = true;
-
-    if (process.env.EXCLUDE_EMBER_ASSETS) {
-      var excludeEmberAssets = process.env.EXCLUDE_EMBER_ASSETS;
-      var excludeRegex = new RegExp("(?:" + excludeEmberAssets.replace(",", "|") + ")\\.js$");
-      var excludeAssets = app.legacyFilesToAppend.filter(function(asset){ return excludeRegex.test(asset); });
-
-      excludeAssets.forEach(function(asset){
-        var index = app.legacyFilesToAppend.indexOf(asset);
-        app.legacyFilesToAppend.splice(index, 1);
-      });
-    }
   },
 
   preBuild: function(result) {
